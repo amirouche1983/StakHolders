@@ -1,107 +1,51 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class Main {
+public  class Main {
+
     public static void main(String[] args) throws IOException {
-        User user = new User();
-
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter number of user");
-        int number_of_user = bf.read();
-        Object [][] userArray = new Object[3][4];
-
-       // String userName = bf.readLine();
-        int i=0;
-
-//        for( i =0; i<3;i++) {
-//
-//            System.out.println("Enter user detail ");
-//            user.setName(bf.readLine());
-//            user.setUserName(bf.readLine());
-//            user.setPassword(bf.readLine());
-//            user.setRole(bf.readLine());
-//            user.setRole(bf.readLine());
-//            for (int j = 0; j <userArray[i].length;j++) {
-//                    userArray[i][j] = user.getName();}
-//                for (int j = 0; j <userArray[i].length;j++) {
-//                    userArray[i][j] = user.getUserName();}
-//                    for (int j = 0; j <userArray[i].length;j++) {
-//                    userArray[i][j] = user.getPassword();}
-//                        for (int j = 0; j <userArray[i].length;j++) {
-//                    userArray[i][j] = user.getRole();
-//
-//                }
-//        }
-//
-//        bf.readLine();
-//        System.out.println(Arrays.deepToString(userArray));
-//
-//
-//
-//
-
-        String[]name = new String[3];
-        String []userNma = new String[3];
-        String [] passWor = new String[3];
-        String[] role = new String[3];
-
-
-
-        for( i =0; i<3;i++) {
-
-            System.out.println("Enter user detail ");
-            user.setName(bf.readLine());
-            user.setUserName(bf.readLine());
-            user.setPassword(bf.readLine());
-            user.setRole(bf.readLine());
-            //user.setRole(bf.readLine());
-
-            name[i] = user.getName();
-
-            userNma[i]= user.getUserName();
-
-            passWor[i] = user.getPassword();
-
-            role[i] = user.getRole();
-            System.out.println(name[i] + "," + userNma[i] + "," + passWor[i] + "," + role[i]);
-
-        }
-//        for( i=0;i<3;i++) {
-//            System.out.println(name[i] + "," + userNma[i] + "," + passWor[i] + "," + role[i]);
-//        }
-        //System.out.println(Arrays.deepToString(userArray));
-        System.out.println("1. Login\n" + "\n" + "2. Exit");
-        int choice = bf.read();
-        choice = bf.read();
-        if (choice==1){
-            System.out.println("Enter the user name :");
-            user.setUserName(bf.readLine());
-          String username =  user.getUserName();
-            System.out.println("Enter the password :");
-            user.setPassword(bf.readLine());
-           String password = user.getPassword();
-
-           while (!username.equalsIgnoreCase(userNma[i])&& !password.equalsIgnoreCase(passWor[i])){
-             i++;
+        boolean UNandPW =false;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Enter number of users");
+            Integer number_of_user = Integer.parseInt(br.readLine());
+            User [] user= new User[number_of_user];
+        for (Integer i=0; i <number_of_user; i++) {
+                int j=i;
+                System.out.println("Enter user " + (j+1) + " detail: ");
+                String user_detail = br.readLine();
+                String[] user_details = user_detail.split(",");
+                user[i]=new User((user_details[0]),(user_details[1]),(user_details[2]),(user_details[3]));
+               }
+            for (User obj : user){
+                System.out.println(obj.getName()+" "+obj.getPassword()+" "+obj.getUserName()+" "+obj.getRole());
+            }
+     do {
+         System.out.println("1. Login");
+         System.out.println("2. Exit");
+         System.out.println("Enter your choice :");
+         Integer choice = Integer.parseInt(br.readLine());
+         if (choice == 1) {
+             System.out.println("Enter the user name :");
+             String EnteredUN = br.readLine();
+             System.out.println("Enter the password :");
+             String EnteredPW = br.readLine();
+             for (User us : user) {
+                 if ((us.getUserName().equals(EnteredUN)) && (us.getPassword().equals(EnteredPW))) {
+                     Requirement[] requirement = null;
+                     us.display(br, requirement, user);
+                 }
+             }
+         }
+     }while (!(br.readLine().equalsIgnoreCase("4")));
+//          if(choice==2){return;}
            }
-//            for (i =0 ; i <userNma.length;i++){
-//                if (username.equalsIgnoreCase(userNma[i])){
-//
-//                }
-//            }
-        }
-
-    }/*
-    1. Create BackLog
-
-        2. Count Requirements
-
-        3. Assign Requirements
-
-        4. Logout*/
+         }
 
 
-   }
+
+
 

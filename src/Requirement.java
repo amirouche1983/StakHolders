@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public class Requirement {
     private Integer id;
@@ -8,6 +9,22 @@ public class Requirement {
     private Integer planTime;
     private Float budget;
     private Boolean requiementStatus;
+
+    public Requirement(Integer id, String description,Float budget ,Integer planTime ) {
+        this.id = id;
+        this.description = description;
+        this.planTime = planTime;
+        this.budget = budget;
+    }
+
+
+    public Requirement(Integer id, String description) {
+        this.id = id;
+        this.description = description;
+    }
+
+
+
     public Integer getId() {
         return id;
     }
@@ -77,4 +94,18 @@ Requirement(){
         this.budget = budget;
         this.requiementStatus = requiementStatus;
     }
+
+
+    Boolean assignreqmts(BufferedReader br,Requirement[] requirement,User user[]) throws IOException {
+        boolean flag=false;
+        for(User use :user){
+            for (Requirement req :requirement){
+                if(br.readLine().equals(use.getName())&& (use.getName().equals(req.assignedTo.getName()))){
+                    flag=true;
+                }
+            }
+        }
+        return flag;
+    }
+
 }
