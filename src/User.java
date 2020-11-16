@@ -1,10 +1,12 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public class User {
     private String userName;
     private String password;
     private String name;
     private String role;
+
 
     public String getUserName() {
         return userName;
@@ -52,9 +54,9 @@ public class User {
         this.name = name;
         this.role = role;
     }
+/*
+    In this method, it check the user role and show the functionality of particular user role,
+     and it will invokes the various methods in Team member, Scrum master and requirement class.
+            */
 
-
-    void display(BufferedReader br, Requirement[] requirement, User[] user) {
-
-    }
 }
