@@ -18,13 +18,10 @@ public class Requirement {
         this.budget = budget;
     }
 
-
     public Requirement(Integer id, String description) {
         this.id = id;
         this.description = description;
     }
-
-
 
     public Integer getId() {
         return id;
@@ -82,9 +79,9 @@ public class Requirement {
         this.requiementStatus = requiementStatus;
     }
 
-Requirement(){
+    Requirement(){
 
-}
+    }
 
     public Requirement(Integer id, String description, User createdBy, User assignedTo, Integer planTime, Float budget, Boolean requiementStatus) {
         this.id = id;
