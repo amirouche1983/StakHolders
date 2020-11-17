@@ -20,9 +20,9 @@ public  class Main {
                 String[] user_details = user_detail.split(",");
                 user[i]=new User((user_details[0]),(user_details[1]),(user_details[2]),(user_details[3]));
                }
-            for (User obj : user){
-                System.out.println(obj.getName()+" "+obj.getPassword()+" "+obj.getUserName()+" "+obj.getRole());
-            }
+//            for (User obj : user){
+//                System.out.println(obj.getName()+" "+obj.getPassword()+" "+obj.getUserName()+" "+obj.getRole());
+//            }
          System.out.println("1. Login");
          System.out.println("2. Exit");
          System.out.println("Enter your choice :");

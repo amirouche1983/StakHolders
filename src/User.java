@@ -97,13 +97,13 @@ public class User {
                         System.out.println("The total number of requirement is : " + scrumMaster.countTotalRequirements(requirement));
                     } else if (SMchoce == 3) {
                         for (Requirement req : requirement) {
-                            System.out.println(req.getId() + " " + req.getDescription());
+                            System.out.println(req.getId() + ". " + req.getDescription());
                         }
                         System.out.println("Enter the requirement id and user name :");
                         scrumMaster.assignreqmts(br, requirement, user);
-                        for (Requirement RC : requirement) {
-                            System.out.println(RC.getId() + " , " + RC.getDescription());
-                        }
+//                        for (Requirement RC : requirement) {
+//                            System.out.println(RC.getId() + " , " + RC.getDescription());
+//                        }
 
                     } else if (SMchoce == 4) {
                         System.out.println("1. Login");
@@ -137,21 +137,7 @@ public class User {
                         System.out.println("Enter your choice :");
                         Integer TMchoce = Integer.parseInt(br.readLine());
                         if (TMchoce == 1) {
-
-                            try {
-                                for(Requirement rc : requirement){
-                                    for (User us: user){
-                                    if(rc.getAssignedTo().getUserName().equals(us.getUserName())) {
-                                        teamMember.myRequriements(requirement,getUserName());
-                                    }
-                                    }
-                                }
-                            }catch (Exception e){
-                                System.out.println("No records found");
-                                }
-
-
-
+                             teamMember.myRequriements(requirement,getUserName());
 
                         } else if (TMchoce == 2) {
                             System.out.println("1. Login");
