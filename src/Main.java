@@ -8,8 +8,7 @@ import java.util.List;
 public  class Main {
 
     public static void main(String[] args) throws IOException {
-        boolean UNandPW =false;
-        boolean logOut=true;
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Enter number of users");
             Integer number_of_user = Integer.parseInt(br.readLine());
@@ -24,7 +23,6 @@ public  class Main {
             for (User obj : user){
                 System.out.println(obj.getName()+" "+obj.getPassword()+" "+obj.getUserName()+" "+obj.getRole());
             }
-     do{
          System.out.println("1. Login");
          System.out.println("2. Exit");
          System.out.println("Enter your choice :");
@@ -38,21 +36,15 @@ public  class Main {
 
              for ( i=0;i<number_of_user;i++) {
                  if ((user[i].getUserName().equals(EnteredUN)) && (user[i].getPassword().equals(EnteredPW))) {
-                     UNandPW=true;
                      Requirement[] requirement = null;
                      user[i].display(br, requirement, user);
                  }
               }
-             if(UNandPW && i<number_of_user){
 
-             logOut=false;
-             }
-           }
-           }while (logOut);
+           }else if (choice == 2) return;
 
-//          if(choice==2){return;}
-           }
          }
+       }
 
 
 

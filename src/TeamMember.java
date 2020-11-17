@@ -1,12 +1,17 @@
 public class TeamMember extends User {
 
+
     void myRequriements(Requirement[] requirement, String userName){
-        Requirement requirement1=new Requirement();
+
         System.out.format("%-15s %s\n","Id","Description") ;
-        for(Requirement rc:requirement){
-            if(requirement1.getAssignedTo().getUserName().equals(userName)) {
-                System.out.format("%-15s %s\n", rc.getId(), rc.getDescription());
-            }
+        int i;
+        for ( i=0;i<requirement.length;i++){
+         try{
+            if(requirement[i].getAssignedTo().getUserName().equals(userName)&& requirement[i].getAssignedTo().getUserName() != null ){
+            System.out.println(requirement[i].getId()+" , "+requirement[i].getDescription());}
+
+        }catch (Exception e){
         }
+       }
+      }
     }
-}
