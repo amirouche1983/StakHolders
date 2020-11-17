@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ScrumMaster extends User {
+
+
     public void createRequirements(String detail,Requirement[] requirement){
 
         String[] Req_dets = detail.split(",");
@@ -21,7 +23,7 @@ public class ScrumMaster extends User {
         String[] Assignreqmts = Assignreqmt.split(",");
         for(Requirement req: requirement) {
             for (User us : user) {
-                if ((Assignreqmts[1].equals(us.getUserName())) && (Integer.parseInt(Assignreqmts[0])==req.getId())) {
+                if ((Integer.parseInt(Assignreqmts[0])==req.getId()) && (Assignreqmts[1].equals(us.getUserName()))) {
                     req.setAssignedTo(us);
                     flag = true;
                 }

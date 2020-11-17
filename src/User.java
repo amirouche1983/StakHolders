@@ -1,8 +1,6 @@
-
-import org.omg.PortableInterceptor.ServerRequestInterceptor;
-
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.Format;
 
 public class User {
     private String userName;
@@ -63,12 +61,15 @@ public class User {
         final String TMrole = "TM";
         final String POrole = "PO";
         boolean Login = true;
+        boolean LOGOut = false;
+        TeamMember teamMember = new TeamMember();
+        ScrumMaster scrumMaster = new ScrumMaster();
+        String GetROLE = getRole();
 
-        switch (getRole()) {
+        switch (GetROLE) {
 
             case SMrole:
                 while (Login) {
-                    ScrumMaster scrumMaster = new ScrumMaster();
                     System.out.println("1. Create BackLog");
                     System.out.println("2. Count Requirements");
                     System.out.println("3. Assign Requirements");
@@ -85,6 +86,7 @@ public class User {
                             String redetail = br.readLine();
                             String detail = redetail.concat(",").concat(i.toString());
                             scrumMaster.createRequirements(detail, requirement);
+
                         }
                         for (Requirement RC : requirement) {
                             System.out.println(RC.getId() + " , " + RC.getDescription() + " , " + RC.getAssignedTo());
@@ -99,60 +101,120 @@ public class User {
                         System.out.println("Enter the requirement id and user name :");
                         scrumMaster.assignreqmts(br, requirement, user);
                         for (Requirement RC : requirement) {
-                            System.out.println(RC.getId() + " , " + RC.getDescription() + " , " + RC.getAssignedTo());
+                            System.out.println(RC.getId() + " , " + RC.getDescription());
                         }
+
                     } else if (SMchoce == 4) {
-                        Login = false;
+                        System.out.println("1. Login");
+                        System.out.println("2. Exit");
+                        System.out.println("Enter your choice :");
+                        Integer choice = Integer.parseInt(br.readLine());
+                        if (choice == 1) {
+                            System.out.println("Enter the user name :");
+                            String EnteredUN = br.readLine();
+                            System.out.println("Enter the password :");
+                            String EnteredPW = br.readLine();
+                            int i;
+                            for (i = 0; i < user.length; i++) {
+                                if ((user[i].getUserName().equals(EnteredUN)) && (user[i].getPassword().equals(EnteredPW))) {
+                                    user[i].display(br, requirement, user);
+                                    Login = false;
+                                }
+                            }
+                        } else if (choice == 2) return;
                     }
                 }
                 break;
 
 
             case TMrole:
+
                 while (Login) {
-                    TeamMember teamMember = new TeamMember();
+
                     System.out.println("1. Display requirement list");
                     System.out.println("2. Logout");
                     System.out.println("Enter your choice :");
                     Integer TMchoce = Integer.parseInt(br.readLine());
                     if (TMchoce == 1) {
-                        String usName = getUserName();
-                        teamMember.myRequriements(requirement, usName);
+                        try {
+                            teamMember.myRequriements(requirement, getUserName());
+                        } catch (Exception e) {
+                            System.out.println("No records found");
+                        }
 
                     } else if (TMchoce == 2) {
-                        Login = false;
+                        System.out.println("1. Login");
+                        System.out.println("2. Exit");
+                        System.out.println("Enter your choice :");
+                        Integer choice = Integer.parseInt(br.readLine());
+                        if (choice == 1) {
+                            System.out.println("Enter the user name :");
+                            String EnteredUN = br.readLine();
+                            System.out.println("Enter the password :");
+                            String EnteredPW = br.readLine();
+                            int i;
+                            for (i = 0; i < user.length; i++) {
+                                if ((user[i].getUserName().equals(EnteredUN)) && (user[i].getPassword().equals(EnteredPW))) {
+                                    user[i].display(br, requirement, user);
+                                    Login = false;
+                                }
+                            }
+                        } else if (choice == 2) return;
+
                     }
                 }
                 break;
 
             case POrole:
+                while (Login) {
+                    ProductOwner productOwner = new ProductOwner();
+                    System.out.println("1. List requirements");
+                    System.out.println("2. Allocate budget");
+                    System.out.println("3. Allocate plan time");
+                    System.out.println("4. Logout");
+                    System.out.println("Enter your choice :");
+                    Integer POchose = Integer.parseInt(br.readLine());
+                    if (POchose == 1) {
+                        System.out.format("%-15s %-15s %-15s %s\n", "Id", "Description", "Budget", "Time");
+                        for (Requirement rc : requirement) {
+                            if (rc.getBudget() == null) {
+                                rc.setBudget(0.00F);
+                            }
+                            if (rc.getPlanTime() == null) {
+                                rc.setPlanTime(0);
+                            }
 
-                ProductOwner productOwner = new ProductOwner();
-                System.out.println("1. List requirements");
-                System.out.println("2. Allocate budget");
-                System.out.println("3. Allocate plan time");
-                System.out.println("4. Logout");
-                Integer POchose = Integer.parseInt(br.readLine());
-                if (POchose == 1) {
-                    System.out.format("%-15s %-15s %-15s %s\n", "Id", "Description", "Budget", "Time");
-                    for (Requirement rc : requirement) {
-                        System.out.format("%-15s %-15s %-15s %s\n", rc.getId(), rc.getDescription(), rc.getBudget(), rc.getPlanTime());
+                            System.out.format("%-15s %-15s %-15s %s\n", rc.getId(), rc.getDescription(), (String.format("%.2f", rc.getBudget())), rc.getPlanTime());
+                        }
+                    } else if (POchose == 2) {
+                        System.out.println("Enter the id and budget :");
+                        String budgetDetail = br.readLine();
+                        productOwner.allocateBudget(budgetDetail, requirement);
+                    } else if (POchose == 3) {
+                        System.out.println("Enter the id and plan time :");
+                        String planTimeDetail = br.readLine();
+                        productOwner.allocatePlanTime(planTimeDetail, requirement);
+                    } else if (POchose == 4) {
+                        System.out.println("1. Login");
+                        System.out.println("2. Exit");
+                        System.out.println("Enter your choice :");
+                        Integer choice = Integer.parseInt(br.readLine());
+                        if (choice == 1) {
+                            System.out.println("Enter the user name :");
+                            String EnteredUN = br.readLine();
+                            System.out.println("Enter the password :");
+                            String EnteredPW = br.readLine();
+                            int i;
+                            for (i = 0; i < user.length; i++) {
+                                if ((user[i].getUserName().equals(EnteredUN)) && (user[i].getPassword().equals(EnteredPW))) {
+                                    user[i].display(br, requirement, user);
+                                    Login = false;
+                                }
+                            }
+                        } else if (choice == 2) return;
                     }
-                } else if (POchose == 2) {
-                    System.out.println("Enter the id and budget :");
-                    String budgetDetail = br.readLine();
-                    productOwner.allocateBudget(budgetDetail, requirement);
-                } else if (POchose == 3) {
-                    System.out.println("Enter the id and plan time :");
-                    String planTimeDetail = br.readLine();
-                    productOwner.allocatePlanTime(planTimeDetail, requirement);
-                } else if (POchose == 4) {
-                    Login = false;
                 }
                 break;
-
-
         }
-
     }
 }
