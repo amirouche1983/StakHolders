@@ -1,4 +1,5 @@
 public class ProductOwner extends User {
+
     Boolean allocateBudget(String budgetDetail, Requirement[] requirement){
         boolean flag=false;
         String[] budgetDetails = budgetDetail.split(",");

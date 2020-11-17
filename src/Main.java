@@ -9,6 +9,7 @@ public  class Main {
 
     public static void main(String[] args) throws IOException {
         boolean UNandPW =false;
+        boolean logOut=true;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter number of users");
         Integer number_of_user = Integer.parseInt(br.readLine());
@@ -23,7 +24,7 @@ public  class Main {
         for (User obj : user){
             System.out.println(obj.getName()+" "+obj.getPassword()+" "+obj.getUserName()+" "+obj.getRole());
         }
-        do {
+        do{
             System.out.println("1. Login");
             System.out.println("2. Exit");
             System.out.println("Enter your choice :");
@@ -33,14 +34,23 @@ public  class Main {
                 String EnteredUN = br.readLine();
                 System.out.println("Enter the password :");
                 String EnteredPW = br.readLine();
-                for (User us : user) {
-                    if ((us.getUserName().equals(EnteredUN)) && (us.getPassword().equals(EnteredPW))) {
+                int i;
+
+                for ( i=0;i<number_of_user;i++) {
+                    if ((user[i].getUserName().equals(EnteredUN)) && (user[i].getPassword().equals(EnteredPW))) {
+                        UNandPW=true;
                         Requirement[] requirement = null;
-                        us.display(br, requirement, user);
+                        user[i].display(br, requirement, user);
                     }
                 }
+                if(UNandPW && i<number_of_user){
+
+                    logOut=false;
+                }
             }
-        }while (!(br.readLine().equalsIgnoreCase("4")));
-//          if(choice==2){return;}
+        }while (logOut);// John,john123,John123,SM   PitBull,pit305,Pit@305,TM   Jesica,Jesica445,J445es,PO
+                         //1223,Code Arena   1224,Hacker Rank    1225,Code Arena
+   //       if(choice==2){return;} // 1224,pit305   1225,pit305
+                                 //       pit305  Pit@305
     }
 }

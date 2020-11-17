@@ -17,13 +17,10 @@ public class Requirement {
         this.budget = budget;
     }
 
-
     public Requirement(Integer id, String description) {
         this.id = id;
         this.description = description;
     }
-
-
 
     public Integer getId() {
         return id;
