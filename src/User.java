@@ -89,9 +89,9 @@ public class User {
                             scrumMaster.createRequirements(detail, requirement);
 
                         }
-                        for (Requirement RC : requirement) {
-                            System.out.println(RC.getId() + " , " + RC.getDescription() + " , " + RC.getAssignedTo());
-                        }
+//                        for (Requirement RC : requirement) {
+//                            System.out.println(RC.getId() + " , " + RC.getDescription());
+//                        }
                         System.out.println("Requirement created successfully");
                     } else if (SMchoce == 2) {
                         System.out.println("The total number of requirement is : " + scrumMaster.countTotalRequirements(requirement));
